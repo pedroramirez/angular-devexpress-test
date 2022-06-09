@@ -1,4 +1,10 @@
-import { Component } from '@angular/core';
+import { NgModule, Component, enableProdMode } from '@angular/core';
+import { Data, Service } from './app.service';
+
+if (!/localhost/.test(document.location.host)) {
+  enableProdMode();
+}
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +12,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angular-demo-chart';
+  dataSource: Data[];
+
+  constructor(service: Service) {
+    this.dataSource = service.getData();
+  }
 }
+
